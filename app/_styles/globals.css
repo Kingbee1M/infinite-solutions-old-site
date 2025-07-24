@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .hamburg {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    transition: all 0.3s;
+  }
+  .hamburg-top,
+  .hamburg-mid,
+  .hamburg-bot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    transform: rotate(0);
+    transition: all 0.5s;
+  }
+  .hamburg-top {
+    transform: translateY(5px);
+  }
+  .hamburg-mid {
+    transform: translateY(13px);
+  }
+  .hamburg-bot {
+    transform: translateY(21px);
+  }
+
+  .active {
+    transform: rotate(90deg);
+  }
+  .active .hamburg-top {
+    transform: rotate(45deg) translateY(6px) translateX(6px);
+  }
+
+  .active .hamburg-mid {
+    display: none;
+  }
+
+  .active .hamburg-bot {
+    transform: rotate(-45deg) translateY(6px) translateX(-6px);
+  }
+
+  .loader {
+    width: 45px;
+    aspect-ratio: 0.75;
+    --c: no-repeat linear-gradient(theme(colors.primary) 0 0);
+    background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
+    background-size: 20% 50%;
+    animation: loading 1s infinite linear;
+  }
+
+  .spinner {
+    margin: 3.2rem auto 1.6rem;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid theme("colors.black");
+    border-right-color: theme("colors.white");
+    animation: rotate 1s infinite linear;
+  }
+
+  .spinner-mini {
+    margin: 0;
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid theme("colors.black");
+    border-right-color: transparent;
+    animation: rotate 1s infinite linear;
+  }
+
+  /* Hide scrollbar for modern browsers */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  @keyframes loading {
+    20% {
+      background-position: 0% 0%, 50% 50%, 100% 50%;
+    }
+    40% {
+      background-position: 0% 100%, 50% 0%, 100% 50%;
+    }
+    60% {
+      background-position: 0% 50%, 50% 100%, 100% 0%;
+    }
+    80% {
+      background-position: 0% 50%, 50% 50%, 100% 100%;
+    }
+  }
+
+  @keyframes slide-in {
+    0% {
+      background-position: bottom right;
+    }
+    100% {
+      background-position: top right;
+    }
+  }
+
+  .group-hover\\:bg-card-pattern {
+    background-image: url("/assets/card-pattern.png");
+    animation: slide-in 3s ease-in-out;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+  
+  /* Firefox support */
+  .custom-scrollbar {
+    scrollbar-width: none;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+}
